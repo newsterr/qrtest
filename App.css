@@ -1,0 +1,39 @@
+.App {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+input {
+  width: 300px;
+  padding: 0.5rem;
+  margin-right: 0.5rem;
+}
+
+button {
+  padding: 0.5rem 1rem;
+  background-color: #005480;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #453953;
+}
+
+button:active {
+  background-color: #FF99FF;
+}
+
+h1:hover {
+  color: #005480;
+}
+
