@@ -1,17 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import QRCode from 'qrcode.react';
 import { saveAs } from 'file-saver';
 import './App.css';
 
 function App() {
   const [text, setText] = useState('');
+  const qrCodeRef = useRef(null);
 
   const handleTextChange = (e) => {
     setText(e.target.value);
   };
 
   const handleDownload = () => {
-    const canvas = document.getElementById('qrcode');
+    const canvas = qrCodeRef.current;
     canvas.toBlob((blob) => {
       saveAs(blob, 'qrcode.png');
     });
@@ -20,7 +21,7 @@ function App() {
   return (
     <div className="App">
       <h1>QR Code Generator</h1>
-      <QRCode id="qrcode" value={text} />
+      <QRCode ref={qrCodeRef} value={text} />
       <div className="input-container">
         <input type="text" value={text} onChange={handleTextChange} placeholder="Enter URL" />
         <button onClick={handleDownload}>Download QR Code</button>
