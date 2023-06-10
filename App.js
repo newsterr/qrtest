@@ -1,6 +1,8 @@
 import React, { useState, useRef } from 'react';
 import QRCode from 'qrcode.react';
 import { saveAs } from 'file-saver';
+import html2canvas from 'html2canvas';
+//import { canvasToBlob } from 'canvas-toBlob';
 import './App.css';
 
 function App() {
@@ -12,16 +14,22 @@ function App() {
   };
 
   const handleDownload = () => {
-    const canvas = qrCodeRef.current;
-    canvas.toBlob((blob) => {
-      saveAs(blob, 'qrcode.png');
-    });
+    const qrCodeElement = qrCodeRef.current;
+    html2canvas(qrCodeElement)
+      .then((canvas) => {
+        canvas.toBlob((bolb) => {
+          saveAs(bolb, 'qrcode.png');
+        })
+      });
+
   };
 
   return (
     <div className="App">
       <h1>QR Code Generator</h1>
-      <QRCode ref={qrCodeRef} value={text} />
+      <div ref={qrCodeRef}>
+        <QRCode value={text} />
+      </div>
       <div className="input-container">
         <input type="text" value={text} onChange={handleTextChange} placeholder="Enter URL" />
         <button onClick={handleDownload}>Download QR Code</button>
